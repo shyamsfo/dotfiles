@@ -1,0 +1,317 @@
+export BOX_NAME='HOME-LINUX'
+apply_prompt ''
+function env_app() {
+
+env_java8
+
+export CATALINA_BASE=${devel}/java/tomcat-servers/server2
+export app=startup
+
+export base=${CATALINA_BASE}
+export src=${devel}/java/workspace/tomcat-startup
+
+export logs=${CATALINA_BASE}/logs
+export webinf=${CATALINA_BASE}/webapps/${app}/WEB-INF
+}
+
+function env_golang() {
+    export PROMPT_DATA=GOLANG
+    apply_prompt ${PROMPT_DATA}
+    GOPATH=${HOME}/devel/go
+    export PATH=$PATH:$(go env GOPATH)/bin
+    cd $GOPATH
+}
+
+function env_hadoop() {
+    env_java8
+    export PROMPT_DATA=HADOOP
+    apply_prompt ${PROMPT_DATA}
+    export BIG_DATA=${HOME}/devel/bigdata
+    export HADOOP_HOME=${HOME}/devel/bigdata/hadoop
+    export hadoop=${HOME}/devel/bigdata/hadoop
+    export HADOOP_MAPRED_HOME=${HADOOP_HOME}
+    export HADOOP_COMMON_HOME=${HADOOP_HOME}
+    export HADOOP_HDFS_HOME=${HADOOP_HOME}
+    export YARN_HOME=${HADOOP_HOME}
+    export HADOOP_COMMON_LIB_NATIVE_DIR=${HADOOP_HOME}/lib/native
+    export HADOOP_INSTALL=${HADOOP_HOME}
+    export HADOOP_USER_CLASSPATH_FIRST=true
+    export hd=${HADOOP_HOME}
+    export hc=${HADOOP_HOME}/etc/hadoop
+    export hs=${HADOOP_HOME}/sbin
+    export userlogs=${HADOOP_HOME}/logs/userlogs
+    export logs=${HADOOP_HOME}/logs
+
+    export HBASE_HOME=${HOME}/devel/bigdata/hbase
+    export hbase=${HBASE_HOME}
+    export hb=${HADOOP_HOME}/bin
+    export hbase_lib=${HBASE_HOME}/lib
+
+    export PHOENIX_HOME=${HOME}/devel/bigdata/phoenix
+
+    export HIVE_HOME=${HOME}/devel/bigdata/hive
+    export HIVE_CONF_DIR=${HOME}/devel/bigdata/hive/conf
+    export hi=${HIVE_HOME}
+
+    export CLASSPATH=${CLASSPATH}:${HADOOP_HOME}/lib/*
+    export CLASSPATH=${CLASSPATH}:${HIVE_HOME}/lib/*
+    #export CLASSPATH=${CLASSPATH}:${HBASE_HOME}/lib/*
+
+    export DERBY_HOME=${HOME}/devel/bigdata/db-derby-10.13.1.1
+
+    pathmunge ${HADOOP_HOME}/bin after
+    pathmunge ${HADOOP_HOME}/sbin after
+    pathmunge ${HBASE_HOME}/bin after
+    pathmunge ${PHOENIX_HOME}/bin after
+    pathmunge ${HIVE_HOME}/bin after
+    pathmunge ${DERBY_HOME}/bin after
+
+    export CLASSPATH=${CLASSPATH}:${DERBY_HOME}/lib/derby.jar:${DERBY_HOME}/lib/derbytools.jar
+
+    export h=${HADOOP_HOME}
+    export s=${BIG_DATA}
+    export hi=${HIVE_HOME}
+
+    echo "=================HADOOP HIVE HBASE PHOENIX==============="
+
+    cd $s
+}
+
+function env_heroku_common() {
+env_java8
+export HEROKU_HOME=/usr/local/heroku
+export heroku=/usr/local/heroku
+
+pathmunge ${HEROKU_HOME} after
+pathmunge ${HEROKU_HOME}/bin after
+PROMPT_DATA="JAVA8 HEROKU"
+export PROMPT_DATA
+apply_prompt ${PROMPT_DATA}
+}
+
+env_heroku() {
+env_heroku_common
+export app=${HOME_DIR}/devel/heroku/embarkk/springapp
+cd $app
+}
+
+function env_android() {
+env_java7
+export android=${HOME_DIR}/devel/android/android-sdk-linux
+pathmunge ${HOME_DIR}/devel/android/android-sdk-linux/tools after
+pathmunge ${HOME_DIR}/devel/android/android-sdk-linux/platform-tools after
+export PROMPT_DATA='ANDROID'
+apply_prompt ${PROMPT_DATA}
+export ph=${HOME_DIR}/devel/phonegap/workshop
+}
+
+env_play() {
+env_java
+export app=${HOME_DIR}/devel/play-framework
+export play=${HOME}/devel/play-framework/play-1.2.5
+pathmunge ${play}
+export PROMPT_DATA='PLAY-FRAMEWORK'
+apply_prompt ${PROMPT_DATA}
+cd $app
+}
+
+env_r() {
+R_HOME=${HOME}/devel/rlang
+PROMPT_DATA="${PROMPT_DATA} R-LANG"
+export PROMPT_DATA
+apply_prompt ${PROMPT_DATA}
+}
+
+env_apache() {
+export err=/var/log/httpd/error_log
+export conf=/var/conf/httpd
+export html=/var/www/html
+}
+
+env_spring_boot() {
+    env_heroku_common
+    PROMPT_DATA="SPRING-BOOT"
+    export PROMPT_DATA
+    apply_prompt ${PROMPT_DATA}
+    export app=${HOME_DIR}/devel/java/springboot-app
+    export s=${HOME_DIR}/devel/java/springboot-app
+    export APP_ROOT=${HOME_DIR}/devel/java/springboot-app
+    export EMBARKK_HOME=${HOME_DIR}/devel/java/springboot-app
+    export DOCKER_BASE_DIR=/data/docker-volumes
+    cd $s
+}
+
+env_guile() {
+export app=${HOME_DIR}/devel/guile
+
+PROMPT_DATA="GUILE"
+export PROMPT_DATA
+apply_prompt ${PROMPT_DATA}
+cd $app
+}
+
+
+env_grails() {
+    env_java
+    GRAILS_HOME=${HOME_DIR}/devel/java/grails-2.2.4
+    pathmunge ${GRAILS_HOME}/bin
+    app=${HOME_DIR}/devel/groovy/grails/sfdc
+    sfdc=${HOME_DIR}/devel/groovy/grails/sfdc
+    export PROMPT_DATA='GRAILS'
+    apply_prompt ${PROMPT_DATA}
+}
+
+env_r_lang() {
+export PROMPT_DATA='R-LANG'
+apply_prompt ${PROMPT_DATA}
+app=${HOME_DIR}/devel/r-lang
+r=${HOME_DIR}/devel/r-lang
+export PROMPT_DATA='R-LANG'
+apply_prompt ${PROMPT_DATA}
+cd $app
+}
+
+env_sunlight_rails() {
+env_ruby
+export PROMPT_DATA='RAILS-SUNLIGHT'
+apply_prompt ${PROMPT_DATA}
+app=${HOME_DIR}/devel/ruby/rails-projects/sunlight
+cd $app
+}
+
+env_rails() {
+    env_ruby
+    export PROMPT_DATA='RAILS-SFDC'
+    apply_prompt ${PROMPT_DATA}
+    app=${HOME_DIR}/devel/ruby/rails-projects/sfdc
+    sfdc=${HOME_DIR}/devel/ruby/rails-projects/sfdc
+    cd $app
+}
+
+    env_sfdc_rails
+}
+
+export RUBYOPT=rubygems 
+RUBYLIB=
+export ruby=${HOME_DIR}/devel/ruby
+app=${HOME_DIR}/devel/ruby/ruby-learner-scripts
+#RUBYLIB can be used to specify a list of directories.
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+export PROMPT_DATA='RUBY'
+apply_prompt ${PROMPT_DATA}
+cd $app
+
+}
+
+env_tv() {
+env_heroku_common
+export app=${HOME_DIR}/devel/heroku/multi-module/tv-whitespace/webapp
+export PROMPT_DATA='TVDB'
+apply_prompt ${PROMPT_DATA}
+}
+
+env_spark() {
+
+env_java
+SPARK_HOME=${HOME}/devel/bigdata/spark
+export SPARK_HOME
+pathmunge ${SPARK_HOME}/sbin after
+pathmunge ${SPARK_HOME}/bin after
+
+}
+
+function env_groovy() {
+env_java8
+export GROOVY_HOME=${devel}/java/groovy-2.1.6
+pathmunge ${GROOVY_HOME}/bin after
+export PROMPT_DATA='GROOVY'
+apply_prompt ${PROMPT_DATA}
+}
+
+function env_scala() {
+env_java8
+export SCALA_HOME=/usr/share/scala
+export CLASSPATH=${CLASSPATH}:/usr/share/scala/lib/scala-library.jar
+export src=${devel}/java/workspace/scala-tutorial/src
+
+export PROMPT_DATA='SCALA'
+apply_prompt ${PROMPT_DATA}
+}
+
+function env_java8() {
+    PROMPT_DATA="JAVA8"
+    export PROMPT_DATA
+    apply_prompt ${PROMPT_DATA}
+
+    export JAVA_HOME=${devel}/java/jdk/jdk1.8.0_152
+    export JRE_HOME=${devel}/java/jdk/jdk1.8.0_152/jre
+
+    export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib 
+    export java=${devel}/java/jdk/jdk1.8.0_152
+    export j=${devel}/java
+    pathmunge ${JAVA_HOME}/bin after
+    env_java_common
+    PROMPT_DATA="${PROMPT_DATA} JAVA8"
+    export PROMPT_DATA
+    apply_prompt ${PROMPT_DATA}
+}
+
+env_java7() {
+
+    export JAVA_HOME=${devel}/java/jdk/jdk1.7.0_79
+    export java=${devel}/java/jdk/jdk1.7.0_79
+    export j=${devel}/java
+
+    env_java_common
+    PROMPT_DATA="${PROMPT_DATA} JAVA7"
+    export PROMPT_DATA
+    apply_prompt ${PROMPT_DATA}
+}
+
+function env_java_common() {
+
+export ANT_HOME=${devel}/java/apache-ant-1.9.2
+export MAVEN_HOME=${devel}/java/apache-maven-3.6.0
+export M2_HOME=${devel}/java/apache-maven-3.6.0
+export maven=${devel}/java/apache-maven-3.6.0
+export repo=${HOME_DIR}/devel/java/maven-repository
+export XMLBEANS_HOME=${devel}/java/xmlbeans-2.4.0
+export ant=${devel}/java/apache-ant-1.7.1
+
+pathmunge ${JAVA_HOME}/bin after
+pathmunge ${JAVA_HOME}/jre/bin after
+pathmunge ${ANT_HOME}/bin after
+pathmunge ${XMLBEANS_HOME}/bin after
+pathmunge ${MAVEN_HOME}/bin after
+pathmunge . after
+
+export ECLIPSE=${devel}/java/eclipse
+export ECLIPSE_DIR=${devel}/java/eclipse
+export eclipse=${devel}/java/eclipse
+export ECLIPSE_HOME=${devel}/java/eclipse
+
+export CATALINA_HOME=${devel}/java/apache-tomcat-7.0.65
+export tomcat=${CATALINA_HOME} 
+export CLASSPATH=.
+
+}
+
+function env_java() {
+env_java8
+}
+
+function env_java6() {
+
+export JAVA_HOME=${devel}/java/jdk/jdk1.6.0_45
+export java=${devel}/java/jdk/jdk1.6.0_45
+export j=${devel}/java
+
+env_java_common
+PROMPT_DATA="JAVA6"
+export PROMPT_DATA
+apply_prompt ${PROMPT_DATA}
+
+}
+
+export -f env_java env_app env_hadoop env_heroku env_android env_play env_r env_apache env_spring_boot env_guile env_grails env_r_lang env_ruby env_rails env_spark env_groovy env_scala

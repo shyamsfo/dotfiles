@@ -1,0 +1,154 @@
+[user]
+	name = Shyam Maniyedath
+	email = smaniyedath@dropbox.com
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = /usr/bin/vim
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+#[diff]
+#      tool = vimdiff
+#[difftool]
+#      prompt = false
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+#[commit]
+#	template = ~msh/.stCommitMsg
+[color]
+  	ui = true
+[alias]
+    tmp  = !git add -A . && git commit -m 'Tmp. Do not merge'
+    undo = !git reset HEAD~1
+    a    = !git aliases
+    dn   = !git diff --name-only HEAD~1
+    rbm  = !"echo 'Fetch and rebase on origin/master'; git fetch ; git rebase origin/master"
+    sync = !git checkout master && git pull --rebase
+    gdf  = "!~/bin/gdf \"$1\" \"$2\" "
+    ll   = log --oneline --decorate
+    f    = fetch
+
+    mm = checkout master 
+
+	# View abbreviated SHA, description, and history graph of the latest 20 commits
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+
+	# View the current working tree status using the short format
+	s = status -s
+
+	# Show the diff between the latest commit and the current state
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+	# `git di $number` shows the diff between the state `$number` revisions ago and the current state
+	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+	# Show verbose output about tags, branches or remotes
+	tags = tag -l
+	branches = branch -a
+	remotes = remote -v
+
+	# List aliases
+	aliases = config --get-regexp alias
+
+	# List contributors with number of commits
+	contributors = shortlog --summary --numbered
+
+	# branch
+	b = branch -v                     # branch (verbose)
+    br = rev-parse --abbrev-ref HEAD
+
+	# commit
+	c = commit -m                     # commit with message
+	ca = commit -am                   # commit all with message
+	ci = commit                       # commit
+    sq = commit --amend --no-edit     # squash into previous commit with same message
+	amend = commit --amend            # ammend your last commit
+	ammend = commit --amend           # ammend your last commit
+	cam = commit -a --amend --no-edit           # ammend your last commit
+
+	# checkout
+	co = checkout                     # checkout
+	nb = checkout -b                  # create and switch to a new branch (mnemonic: "git new branch branchname...")
+
+	# cherry-pick
+	cp = cherry-pick -x               # grab a change from a branch
+
+	# diff
+	d = diff                          # diff unstaged changes
+	dc = diff --cached                # diff staged changes
+	last = diff HEAD^                 # diff last committed change
+	d1 = diff HEAD^                 # diff last committed change
+
+	# log
+	l = log --graph --date=short
+	changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+	short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+	simple = log --pretty=format:\" * %s\"
+	shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+
+	# pull
+	pl = pull                         # pull
+
+	# fetch
+	fe = fetch                         # fetch
+
+	# push
+	ps = push                         # push
+    # Commented for safety. pom = push origin master          # push
+
+	# rebase
+	rc = rebase --continue            # continue rebase
+	rs = rebase --skip                # skip rebase
+
+	# remote
+	r = remote -v                     # show remotes (verbose)
+
+	# reset
+	unstage = reset HEAD              # remove files from index (tracking)
+	uncommit = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
+	filelog = log -u                  # show changes to a file
+	mt = mergetool                    # fire up the merge tool
+
+	# stash
+	ss = stash                        # stash changes
+	sl = stash list                   # list stashes
+	sa = stash apply                  # apply stash (restore changes)
+	sd = stash drop                   # drop stashes (destory changes)
+
+	# status
+	s = status                        # status
+	st = status                       # status
+	stat = status                     # status
+
+	# tag
+	t = tag -n                        # show tags with <n> lines of each tag message
+
+	[color]
+
+	# Use colors in Git commands that are capable of colored output when
+	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+	ui = auto
+
+[color "branch"]
+
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
+
+[color "status"]
+
+	added = yellow
+	changed = green
+	untracked = cyan
+[push]
+	default = current
+[http]
+	sslVerify = false

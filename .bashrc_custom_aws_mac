@@ -1,0 +1,28 @@
+function env_aws() {
+export s=/Users/maniyeda/devel/java/springboot-app
+export j=/Users/maniyeda/devel/java/springboot-app
+export hive=/Users/maniyeda/devel/hadoop/docker-hive
+export h=/Users/maniyeda/devel/hadoop/docker-hive
+}
+
+env_aws_common() {
+export node=/Users/maniyeda/devel/nodejs
+export py=/Users/maniyeda/devel//python
+}
+
+env_aws_common
+env_aws
+alias ls='ls -lrtG'
+
+function preview() {
+  open -a Preview $1
+}
+
+export BOX_NAME='AWS-MAC'
+
+apply_prompt ''
+
+set_java_version 1.8
+
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
