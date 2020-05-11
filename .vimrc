@@ -18,11 +18,10 @@ Plugin 'yegappan/mru'
 Plugin 'tpope/vim-fugitive'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'mileszs/ack.vim'
-"Plugin 'Valloric/YouCompleteMe'
 Plugin 'pangloss/vim-javascript'
-"Plugin 'junegunn/fzf.vim'
-"Plugin 'ycm-core/YouCompleteMe'
 
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'junegunn/fzf.vim'
 "Plugin 'bling/vim-airline'
 "Plugin 'Buffergator'
 "Plugin 'MarkdownFootnotes'
@@ -567,6 +566,10 @@ if has("gui_macvim")
     colorscheme gruvbox
     colorscheme flattened_light
     colorscheme bw
+    "colorscheme PaperColor
+    "colorscheme gruvbox
+    "colorscheme flattened_light
+    "colorscheme bw
     colorscheme solarized8_light
 elseif has("gui_running")
     se guifont=Ubuntu\ Mono\ 11

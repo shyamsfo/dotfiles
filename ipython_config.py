@@ -1,3 +1,6 @@
+##
+#This file should be linked at ${HOME}/.ipython/profile_default
+
 # Configuration file for ipython.
 
 #------------------------------------------------------------------------------

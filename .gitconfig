@@ -114,7 +114,7 @@
 	ss = stash                        # stash changes
 	sl = stash list                   # list stashes
 	sa = stash apply                  # apply stash (restore changes)
-	sd = stash drop                   # drop stashes (destory changes)
+	sd = stash drop                   # drop stashes (destroy changes)
 
 	# status
 	s = status                        # status
@@ -123,6 +123,7 @@
 
 	# tag
 	t = tag -n                        # show tags with <n> lines of each tag message
+	track = "!f() { ([ $# -eq 2 ] && ( echo \"Setting tracking for branch \" $1 \" -> \" $2;git branch --set-upstream $1 $2; ) || ( git for-each-ref --format=\"local: %(refname:short) <--sync--> remote: %(upstream:short)\" refs/heads && echo --Remotes && git remote -v)); }; f"
 
 	[color]
 

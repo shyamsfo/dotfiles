@@ -120,7 +120,7 @@ function apply_prompt() {
     #PS1="${CYAN}[${BLUE}${BOX_NAME} ${RED}\u@${MAGENTA}\h ${BLUE}\w${GREEN}${PROMPT_DATA:- }${MAGENTA}(\$(get_git_branch))${MAGENTA} \#${MAGENTA}${CYAN}]${RESET}\[\e[0m\]${RESET}"
     #PS1="${CYAN}[${MAGENTA}${BOX_NAME} ${RED}shyam ${BLUE}\w${GREEN} ${PROMPT_DATA:- }${MAGENTA}(\$(get_git_branch))${MAGENTA} \#${MAGENTA}${CYAN}]${RESET}\[\e[0m\]${RESET}"
     #PS1="${CYAN}[${MAGENTA}${BOX_NAME} ${RED}shyam ${BLUE}\$(short_pwd) ${GREEN} ${PROMPT_DATA:- }${MAGENTA}(\$(get_git_branch))${MAGENTA} \#${MAGENTA}${CYAN}]${RESET}\[\e[0m\]${RESET}"
-    PS1="${CYAN}[${MAGENTA}${BOX_NAME} ${RED}\u ${BLUE}\$(get_perl_pwd)${GREEN}${PROMPT_DATA:- }${MAGENTA}(\$(get_git_branch))${MAGENTA} \#${MAGENTA}${CYAN}]${RESET}\[\e[0m\]${RESET}"
+    PS1="${CYAN}[${MAGENTA}${BOX_NAME} ${RED}\u ${BLUE}\$(get_perl_pwd)${GREEN} ${PROMPT_DATA:- } ${MAGENTA}(\$(get_git_branch))${MAGENTA} \#${MAGENTA}${CYAN}]${RESET}\[\e[0m\]${RESET}"
     export PS1
 }
 
@@ -382,6 +382,15 @@ jsonify() {
         python -mjson.tool | pygmentize -l javascript;
     fi;
 }
+
+
+export EMOJIS=('🌄' '☀️' '☕️' '🍳' '🍞' '🐓' '🐔' '🌲' '🌳' '🌴' '🌵' '🌷' '🌺' '🌸' '🌹' '🌻' '🌼' '💐' '🌾' '🌿' '🍀' '🍁' '🍂' '🍃' '🍄' '☀️' '⛅️' '☁️' '☔️' '🌈' '🌊' '🗻' '🌍' '🌞' '💻' '🚽' '📚' '✂️' '🔪' '🍔' '🍕' '🍖' '🍗' '🍘' '🍙' '🍚' '🍛' '🍜' '🍝' '🍞' '🍟' '🍣' '🍤' '🍥' '🍱' '🍲' '🍳' '🍴' '🍏' '🍇' '🍉' '🍊' '🍌' '🍍' '🍑' '🍒' '🍓' '🍡' '🍢' '🍦' '🍧' '🍨' '🍩' '🍪' '🍫' '🍬' '🍭' '🍮' '🍰' '🍷' '🍸' '🍶' '🍹' '🍺' '🍻' '😴' '🌠' '🌑' '🌒' '🌔' '🌖' '🌘' '🌚' '🌝' '🌛' '🌜' '⛺️' '🌃' '🌉' '🌌');
+
+random_emoji() {
+  SELECTED_EMOJI=${EMOJIS[$RANDOM % ${#EMOJIS[@]}]};
+  echo $SELECTED_EMOJI;
+}
+
 
 pidportfunction() {
     lsof -n -i4TCP:$1 | grep LISTEN
