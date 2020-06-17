@@ -134,7 +134,6 @@ pathmunge ~/pbin
 pathmunge ~/local_bin
 pathmunge .
 pathmunge /usr/local/go/bin after
-pathmunge /Users/smaniyedath/Library/Python/2.7/bin after
 export PATH
 
 export html=/var/www/html
@@ -397,6 +396,7 @@ pidportfunction() {
 }
 
 alias pidport=pidportfunction
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 #required for some pip install errors for uwsgi and few other packages
 export CFLAGS="-Wno-error=varargs"
@@ -406,7 +406,6 @@ export a=~/.aliases
 export v=~/.vimrc
 export DOCKER_BASE_DIR=${HOME}/devel/docker-volumes
 pathmunge ${HOME}/devel/golang/bin after
-
 [ -f $HOME/.aliases ] && . $HOME/.aliases
 [ -f $HOME/.bashrc_custom ] && . $HOME/.bashrc_custom
 [ -f $HOME/.credentials ] && . $HOME/.credentials

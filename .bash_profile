@@ -25,7 +25,9 @@ function start_ssh_agent () {
         /usr/bin/ssh-agent > ${SSH_AGENT_ENV_FILE}
         . ${SSH_AGENT_ENV_FILE}
         ssh-add
-        ssh-add -k ~/.ssh/ssh-us-west-2-dropbox.pem
+        if [ -f ~/.ssh/ssh-us-west-2-dropbox.pem ]; then
+            ssh-add -k ~/.ssh/ssh-us-west-2-dropbox.pem
+        fi
     else
         echo "Found an existing ssh-agent ${SSH_AGENT_PID}. nothing to do."
     fi

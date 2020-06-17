@@ -1,8 +1,5 @@
-[user]
-	name = Shyam Maniyedath
-	email = smaniyedath@dropbox.com
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/SManiyedath/.gitignore_global
 	editor = /usr/bin/vim
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
@@ -12,7 +9,7 @@
 #[difftool]
 #      prompt = false
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 #[commit]
 #	template = ~msh/.stCommitMsg
@@ -153,3 +150,8 @@
 	default = current
 [http]
 	sslVerify = false
+[credential]
+	helper = osxkeychain
+[user]
+	name = smaniyedath
+	email = shyam_maniyedath@intuit.com
