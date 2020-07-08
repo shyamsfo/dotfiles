@@ -137,3 +137,6 @@ alias fastping='ping -c 100 -s.2'
 alias ports='netstat -tulan'
 
 alias ww='wtfis -f'
+
+
+alias anp='ansible-playbook'

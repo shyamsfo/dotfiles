@@ -1,7 +1,5 @@
 # .bashrc
 
-echo "Running bashrc"
-
 #Also check ~/.bashrc_custom for more options specific to this machine
 
 export HOME_DIR=${HOME}

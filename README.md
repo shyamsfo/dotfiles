@@ -4,7 +4,7 @@
 
 My `.bashrc`, `.vimrc` and other init files.
 
-## Installation
+## Installation on a new laptop/desktop
 
 First, clone the repository.
 
@@ -21,6 +21,15 @@ cd ${HOME}/init
 (Any existing files are saved into `${HOME}/old_dotfiles`)
 
 Finally, start a new shell for these to take effect
+
+## Installation on remote hosts
+
+Start a shell on your desktop.
+First update hosts file in this directory.
+Then run:
+```
+ansible-playbook sync.yml
+```
 
 ## Usage
 

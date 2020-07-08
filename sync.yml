@@ -1,0 +1,52 @@
+- hosts: all
+  gather_facts: true
+  remote_user: ubuntu
+  vars:
+    files:
+      - only
+      - for
+      - illustration
+  tasks:
+  - name: Printing all the environment variables in Ansible
+    debug:
+      msg: "{{ ansible_env }}"
+
+  - name: Create remote directories
+    file:
+      path: " {{ item }} "
+      state: directory
+      mode: 0755
+      group: ubuntu
+      owner: ubuntu
+    with_items:
+      - [ '/home/ubuntu/init', "/home/ubuntu/.vim"]
+
+  - name: Sync Init directories
+    synchronize:
+      src: /Users/maniyeda/init/dotfiles/
+      dest: /home/ubuntu/init/dotfiles/
+      delete: yes
+      recursive: yes
+      rsync_opts:
+        - "--no-motd"
+        - "--exclude=.git"
+
+  - name: Sync vim directories
+    synchronize:
+      src: /Users/maniyeda/.vim/
+      dest: /home/ubuntu/.vim/
+      delete: yes
+      recursive: yes
+      rsync_opts:
+        - "--no-motd"
+        - "--exclude=.git"
+
+
+  - name: Create links
+    tags:
+     - restart
+    environment:
+        EMBARKK_HOME: /embarkk
+    shell:
+      cmd: "./create_links.sh"
+      chdir: /home/ubuntu/init/dotfiles
