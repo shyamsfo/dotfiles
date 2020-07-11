@@ -4,6 +4,7 @@ file_list='.bashrc .bash_profile .aliases .vimrc .emacs .editrc .inputrc .curlrc
 echo "Linking dotfiles from ${base_dir} to ${HOME}"
 mkdir -p ${HOME}/old_dotfiles
 cd ${base_dir}
+
 for file in ${file_list}
 do
     if [ -f ${HOME}/${file} ]; then
@@ -11,6 +12,7 @@ do
         \rm ${HOME}/${file}
     fi
 done
+
 for file in ${file_list}
 do
     echo "Linking $file"

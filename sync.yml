@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: web
   gather_facts: true
   remote_user: ubuntu
   vars:
@@ -13,13 +13,15 @@
 
   - name: Create remote directories
     file:
-      path: " {{ item }} "
+      path: "{{item}}"
       state: directory
       mode: 0755
-      group: ubuntu
       owner: ubuntu
+      group: ubuntu
     with_items:
-      - [ '/home/ubuntu/init', "/home/ubuntu/.vim"]
+      - '/home/ubuntu/init'
+      - '/home/ubuntu/.vim'
+      - '/home/ubuntu/init/dotfiles'
 
   - name: Sync Init directories
     synchronize:
@@ -41,12 +43,25 @@
         - "--no-motd"
         - "--exclude=.git"
 
+  - name: Copy bashrc customization
+    copy:
+      src: /Users/maniyeda/init/dotfiles/.bashrc_custom
+      dest: /home/ubuntu/.bashrc_custom
+      owner: ubuntu
+      group: ubuntu
+      mode: '0644'
+
+  - name: Change ownership
+    shell:
+        cmd: "chown -R ubuntu:ubuntu /home/ubuntu/init"
+
+  - name: Change ownership
+    shell:
+        cmd: "chown -R ubuntu:ubuntu /home/ubuntu/.vim"
 
   - name: Create links
-    tags:
-     - restart
     environment:
         EMBARKK_HOME: /embarkk
     shell:
-      cmd: "./create_links.sh"
+      cmd: "/home/ubuntu/init/dotfiles/create_links.sh"
       chdir: /home/ubuntu/init/dotfiles

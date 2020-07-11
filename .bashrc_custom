@@ -1,0 +1,5 @@
+export BOX_NAME='AWS-BASTION'
+apply_prompt ''
+
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+

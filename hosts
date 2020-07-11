@@ -1,5 +1,5 @@
-[all]
-u0
+[web]
+3.87.21.89
 
 [all:vars]
 ansible_connection=ssh
