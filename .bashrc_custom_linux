@@ -1,5 +1,3 @@
-export BOX_NAME='HOME-LINUX'
-apply_prompt ''
 function env_app() {
 
 env_java8
@@ -91,35 +89,18 @@ apply_prompt ${PROMPT_DATA}
 
 env_heroku() {
 env_heroku_common
-export app=${HOME_DIR}/devel/heroku/embarkk/springapp
+export app=${HOME}/devel/heroku/embarkk/springapp
 cd $app
 }
 
 function env_android() {
 env_java7
-export android=${HOME_DIR}/devel/android/android-sdk-linux
-pathmunge ${HOME_DIR}/devel/android/android-sdk-linux/tools after
-pathmunge ${HOME_DIR}/devel/android/android-sdk-linux/platform-tools after
+export android=${HOME}/devel/android/android-sdk-linux
+pathmunge ${HOME}/devel/android/android-sdk-linux/tools after
+pathmunge ${HOME}/devel/android/android-sdk-linux/platform-tools after
 export PROMPT_DATA='ANDROID'
 apply_prompt ${PROMPT_DATA}
-export ph=${HOME_DIR}/devel/phonegap/workshop
-}
-
-env_play() {
-env_java
-export app=${HOME_DIR}/devel/play-framework
-export play=${HOME}/devel/play-framework/play-1.2.5
-pathmunge ${play}
-export PROMPT_DATA='PLAY-FRAMEWORK'
-apply_prompt ${PROMPT_DATA}
-cd $app
-}
-
-env_r() {
-R_HOME=${HOME}/devel/rlang
-PROMPT_DATA="${PROMPT_DATA} R-LANG"
-export PROMPT_DATA
-apply_prompt ${PROMPT_DATA}
+export ph=${HOME}/devel/phonegap/workshop
 }
 
 env_apache() {
@@ -133,16 +114,16 @@ env_spring_boot() {
     PROMPT_DATA="SPRING-BOOT"
     export PROMPT_DATA
     apply_prompt ${PROMPT_DATA}
-    export app=${HOME_DIR}/devel/java/springboot-app
-    export s=${HOME_DIR}/devel/java/springboot-app
-    export APP_ROOT=${HOME_DIR}/devel/java/springboot-app
-    export EMBARKK_HOME=${HOME_DIR}/devel/java/springboot-app
+    export app=${HOME}/devel/java/springboot-app
+    export s=${HOME}/devel/java/springboot-app
+    export APP_ROOT=${HOME}/devel/java/springboot-app
+    export EMBARKK_HOME=${HOME}/devel/java/springboot-app
     export DOCKER_BASE_DIR=/data/docker-volumes
     cd $s
 }
 
 env_guile() {
-export app=${HOME_DIR}/devel/guile
+export app=${HOME}/devel/guile
 
 PROMPT_DATA="GUILE"
 export PROMPT_DATA
@@ -153,10 +134,10 @@ cd $app
 
 env_grails() {
     env_java
-    GRAILS_HOME=${HOME_DIR}/devel/java/grails-2.2.4
+    GRAILS_HOME=${HOME}/devel/java/grails-2.2.4
     pathmunge ${GRAILS_HOME}/bin
-    app=${HOME_DIR}/devel/groovy/grails/sfdc
-    sfdc=${HOME_DIR}/devel/groovy/grails/sfdc
+    app=${HOME}/devel/groovy/grails/sfdc
+    sfdc=${HOME}/devel/groovy/grails/sfdc
     export PROMPT_DATA='GRAILS'
     apply_prompt ${PROMPT_DATA}
 }
@@ -164,8 +145,8 @@ env_grails() {
 env_r_lang() {
 export PROMPT_DATA='R-LANG'
 apply_prompt ${PROMPT_DATA}
-app=${HOME_DIR}/devel/r-lang
-r=${HOME_DIR}/devel/r-lang
+app=${HOME}/devel/r-lang
+r=${HOME}/devel/r-lang
 export PROMPT_DATA='R-LANG'
 apply_prompt ${PROMPT_DATA}
 cd $app
@@ -175,7 +156,7 @@ env_sunlight_rails() {
 env_ruby
 export PROMPT_DATA='RAILS-SUNLIGHT'
 apply_prompt ${PROMPT_DATA}
-app=${HOME_DIR}/devel/ruby/rails-projects/sunlight
+app=${HOME}/devel/ruby/rails-projects/sunlight
 cd $app
 }
 
@@ -183,8 +164,8 @@ env_rails() {
     env_ruby
     export PROMPT_DATA='RAILS-SFDC'
     apply_prompt ${PROMPT_DATA}
-    app=${HOME_DIR}/devel/ruby/rails-projects/sfdc
-    sfdc=${HOME_DIR}/devel/ruby/rails-projects/sfdc
+    app=${HOME}/devel/ruby/rails-projects/sfdc
+    sfdc=${HOME}/devel/ruby/rails-projects/sfdc
     cd $app
 }
 
@@ -193,8 +174,8 @@ env_rails() {
 
 export RUBYOPT=rubygems 
 RUBYLIB=
-export ruby=${HOME_DIR}/devel/ruby
-app=${HOME_DIR}/devel/ruby/ruby-learner-scripts
+export ruby=${HOME}/devel/ruby
+app=${HOME}/devel/ruby/ruby-learner-scripts
 #RUBYLIB can be used to specify a list of directories.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
@@ -204,15 +185,7 @@ cd $app
 
 }
 
-env_tv() {
-env_heroku_common
-export app=${HOME_DIR}/devel/heroku/multi-module/tv-whitespace/webapp
-export PROMPT_DATA='TVDB'
-apply_prompt ${PROMPT_DATA}
-}
-
 env_spark() {
-
 env_java
 SPARK_HOME=${HOME}/devel/bigdata/spark
 export SPARK_HOME
@@ -221,7 +194,7 @@ pathmunge ${SPARK_HOME}/bin after
 
 }
 
-function env_groovy() {
+env_groovy() {
 env_java8
 export GROOVY_HOME=${devel}/java/groovy-2.1.6
 pathmunge ${GROOVY_HOME}/bin after
@@ -229,7 +202,7 @@ export PROMPT_DATA='GROOVY'
 apply_prompt ${PROMPT_DATA}
 }
 
-function env_scala() {
+env_scala() {
 env_java8
 export SCALA_HOME=/usr/share/scala
 export CLASSPATH=${CLASSPATH}:/usr/share/scala/lib/scala-library.jar
@@ -239,32 +212,17 @@ export PROMPT_DATA='SCALA'
 apply_prompt ${PROMPT_DATA}
 }
 
-function env_java8() {
-    PROMPT_DATA="JAVA8"
-    export PROMPT_DATA
-    apply_prompt ${PROMPT_DATA}
-
-    export JAVA_HOME=${devel}/java/jdk/jdk1.8.0_152
-    export JRE_HOME=${devel}/java/jdk/jdk1.8.0_152/jre
-
+env_java8() {
+    export JAVA_HOME=${devel}/java/jdk/jdk1.8.0_261
+    export JRE_HOME=${devel}/java/jdk/jdk1.8.0_261/jre
     export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib 
-    export java=${devel}/java/jdk/jdk1.8.0_152
+    export java=${devel}/java/jdk/jdk1.8.0_261
     export j=${devel}/java
+
     pathmunge ${JAVA_HOME}/bin after
     env_java_common
+
     PROMPT_DATA="${PROMPT_DATA} JAVA8"
-    export PROMPT_DATA
-    apply_prompt ${PROMPT_DATA}
-}
-
-env_java7() {
-
-    export JAVA_HOME=${devel}/java/jdk/jdk1.7.0_79
-    export java=${devel}/java/jdk/jdk1.7.0_79
-    export j=${devel}/java
-
-    env_java_common
-    PROMPT_DATA="${PROMPT_DATA} JAVA7"
     export PROMPT_DATA
     apply_prompt ${PROMPT_DATA}
 }
@@ -275,7 +233,7 @@ export ANT_HOME=${devel}/java/apache-ant-1.9.2
 export MAVEN_HOME=${devel}/java/apache-maven-3.6.0
 export M2_HOME=${devel}/java/apache-maven-3.6.0
 export maven=${devel}/java/apache-maven-3.6.0
-export repo=${HOME_DIR}/devel/java/maven-repository
+export repo=${HOME}/devel/java/maven-repository
 export XMLBEANS_HOME=${devel}/java/xmlbeans-2.4.0
 export ant=${devel}/java/apache-ant-1.7.1
 
@@ -291,27 +249,13 @@ export ECLIPSE_DIR=${devel}/java/eclipse
 export eclipse=${devel}/java/eclipse
 export ECLIPSE_HOME=${devel}/java/eclipse
 
-export CATALINA_HOME=${devel}/java/apache-tomcat-7.0.65
-export tomcat=${CATALINA_HOME} 
-export CLASSPATH=.
-
 }
 
 function env_java() {
 env_java8
 }
 
-function env_java6() {
-
-export JAVA_HOME=${devel}/java/jdk/jdk1.6.0_45
-export java=${devel}/java/jdk/jdk1.6.0_45
-export j=${devel}/java
-
-env_java_common
-PROMPT_DATA="JAVA6"
-export PROMPT_DATA
-apply_prompt ${PROMPT_DATA}
-
-}
-
 export -f env_java env_app env_hadoop env_heroku env_android env_play env_r env_apache env_spring_boot env_guile env_grails env_r_lang env_ruby env_rails env_spark env_groovy env_scala
+
+export BOX_NAME='HOME-LINUX'
+apply_prompt ''
