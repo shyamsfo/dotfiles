@@ -28,6 +28,9 @@ function start_ssh_agent () {
         if [ -f ~/.ssh/ssh-us-west-2-dropbox.pem ]; then
             ssh-add -k ~/.ssh/ssh-us-west-2-dropbox.pem
         fi
+        if [ -f ~/.ssh/us-east-1-terraform-keypair.pem ]; then
+            ssh-add -k ~/.ssh/us-east-1-terraform-keypair.pem
+        fi
         ssh-add -K
     else
         echo "Found an existing ssh-agent ${SSH_AGENT_PID}. nothing to do."
@@ -47,7 +50,7 @@ function start_ssh_agent_orig() {
 }
 
 export -f start_ssh_agent
-start_ssh_agent
+#start_ssh_agent
 
 # Get the aliases and functions
 [ -f $HOME/.bashrc ] && . $HOME/.bashrc

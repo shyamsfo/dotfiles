@@ -19,9 +19,10 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'mileszs/ack.vim'
 Plugin 'pangloss/vim-javascript'
+Plugin 'JamshedVesuna/vim-markdown-preview'
 " Plugin 'Valloric/YouCompleteMe'
 "Plugin 'junegunn/fzf.vim'
-"Plugin 'ycm-core/YouCompleteMe'
+Plugin 'ycm-core/YouCompleteMe'
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'junegunn/fzf.vim'
 "Plugin 'bling/vim-airline'
@@ -115,6 +116,9 @@ syntax on
 "Show the time on the statusline 
 set rulerformat=%55(%{strftime('%a\ %b\ %e\ %I:%M\ %p')}\ %5l,%-6(%c%V%)\ %P%)
 
+" useful for completing words. using ctrl-X ctrl-k in insert mode
+"
+set dictionary=/usr/share/dict/words
 "Colors on the statusline. 
 "Needs different format for gui vim, which we dont care about
 hi StatusLine   ctermfg=8 ctermbg=2 cterm=NONE
@@ -195,6 +199,14 @@ map <F3> :buffers<CR>:buffer
 map <silent> j gj
 map <silent> k gk
 
+" For long lines, e.g. editing text, put a break rather than wrapping around
+setlocal linebreak
+setlocal nolist
+setlocal display+=lastline
+setlocal nolist
+setlocal display+=lastline
+
+
 "in paste mode, it wont autoindent. press F12 to get back to normal
 "set pastetoggle=<F12>
 
@@ -212,11 +224,17 @@ let mapleader=","
 "use \N to load :NERDTree
 map <Leader>N :NERDTree<cr>
 
-"use Leader, r to locate the current file with NerdTree
+"use Leader r to locate the current file with NerdTree
 map <Leader>r :NERDTreeFind<cr>
-" When in NerdTree, use C to make a directory the root. and m to create/update a file in the current directory.
 
-"use \b to switch buffers
+"use Leader R to reepeat the last command. or Leader dot
+map <Leader>R @:
+map <Leader>. @:
+
+" When in NerdTree, use C to make a directory the root. and m to create/update a file in the current directory.
+" and cd to change CWD of vim to the current directory in NerdTree
+
+"use \b to switch buffers - Show buffer menu
 map <Leader>b <F3>
 
 " Set paste mode.  useful for copying from clipboard without autoident etc.
@@ -240,13 +258,6 @@ map <Leader>p :se paste
 map <Leader>P "+p
 map <Leader>C "+yy
 
-" For long lines, e.g. editing text, put a break rather than wrapping around
-setlocal linebreak
-setlocal nolist
-setlocal display+=lastline
-setlocal nolist
-setlocal display+=lastline
-
 map <Leader>c "*yy
 " Copy to clipboard. Broken because " is also start of comment
 map <Leader>v "*p
@@ -258,6 +269,7 @@ map <Leader>n :n<C-M>
 " next file
 map <Leader>y :N<C-M>
 " previous file. Sadly, No convenient key available right now :(
+"
 map <Leader>l :!ls<C-M>
 " run ls
 map <Leader>M :MRU<C-M>
@@ -301,6 +313,15 @@ map <Leader>f :CtrlPMixed<C-M>
 " run File Finder
 map <Leader>F :echo expand('%:p')<C-M>
 "Full path fofile
+"
+"map <Leader>F :echo @% <C-M>     "name of file
+" \S to open our own poor scratch buffer
+map <Leader>S :e ~/devel/notes-and-tips/buffer.txt<C-M>
+"run current file as python program
+"map <Leader>Y :!python %<C-M>
+
+"Git Blame. Requires https://github.com/tpope/vim-fugitive to be installed
+map <Leader>G :Gblame<C-M>
 
 " Interesting way of doing things. Use Space as :
 " https://engineering.purdue.edu/ece264/17au/static/.vimrc.html
@@ -313,15 +334,6 @@ map <Leader>F :echo expand('%:p')<C-M>
 "Quickfix window not yet learnt and enabled.
 "
 map <F8> :noh<CR>
-
-"map <Leader>F :echo @% <C-M>     "name of file
-" \S to open our own poor scratch buffer
-map <Leader>S :e ~/devel/notes-and-tips/buffer.txt<C-M>
-"run current file as python program
-"map <Leader>Y :!python %<C-M>
-
-"Git Blame. Requires https://github.com/tpope/vim-fugitive to be installed
-map <Leader>G :Gblame<C-M>
 
 "Use Ctrl-P for finding files anywhere with fuzzy search
 " Press <c-f> and <c-b> to cycle between modes.
@@ -346,7 +358,7 @@ let g:ctrlp_use_caching = 1
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 
-"Specify the number of recently opened files you want CtrlP to remember: >
+"the number of recently opened files you want CtrlP to remember: >
 let g:ctrlp_mruf_max = 2500
 
 "search by filename rather than fullpath
@@ -391,8 +403,7 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 " map <Leader>t :tabnew
 "
 " Tags database using YoucompleteMe
-nnoremap <leader>t :YcmCompleter GoTo<CR>
-
+" nnoremap <leader>t :YcmCompleter GoTo<CR>
 
 if has("autocmd")
     filetype plugin indent on
@@ -424,6 +435,41 @@ set t_vb=
 " set rtp+=~/.fzf
 
 au BufNewFile,BufRead Jenkinsfile setf groovy
+
+" Visual blocks
+" press v and enter visual block mode, now keep pressing j,k, G to keep selecting
+" lines as much as you want and once selected you can 
+" indent the whole selection using =
+" delete the whole selection using d
+" to select the region between 2 braces you can vi( or vi)
+" to delete the region between 2 braces you can di( or di)
+" short cuts for above 2: vib and dib 
+" (select everything between braces,or delete every thing between brances)
+" check this: https://til.hashrocket.com/vim
+
+" gi to go to last place of edit. this automatically  puts u in insert
+"
+" mode there. so change something in say line 10,  move around, a couple pages and then press
+" gi to go back to line 10
+"
+" Ctrl-O and Ctrl-I to navigate the jumplist without going to edit mode.
+" `` and '' to swap between current point and the immediate previous point
+" :jumps to see the jumplist
+"
+" special marks : (. " ' ` 0 1 etc): https://vim.fandom.com/wiki/Using_marks
+" https://vim.fandom.com/wiki/Using_marks
+" g; and g, to move forward and backward in edit locations (not jumplist which
+" is whereever you navigated to, not necessarily edited)
+"
+" cc       Delete the current line, set insert-mode,,
+" https://gist.github.com/awidegreen/3854277 Nice cheat sheet.
+" *    search for word under cursor (forward) and highlight occurrence (see incsearch, hlsearch below)
+" %    jump from open/close ( / #if / ( / { to corresponding ) / #endif / } 
+" [{   jump to start of current code block
+" ]}   jump to end of current code block
+" gd   jump to var declaration (see incsearch, hlsearch below)
+" g;   jump back to last edited position.
+" [m   jump to start of funtion body
 
 "Load NERDTree automatically. commented for now..
 " autocmd vimenter * NERDTree
@@ -499,10 +545,47 @@ au BufNewFile,BufRead Jenkinsfile setf groovy
 
 "echo g:colors_name to get color scheme in gui
 "
+"Insert mode completion. Great stuff
+"https://www.youtube.com/watch?v=3TX3kV3TICU
+"https://georgebrock.github.io/talks/vim-completion/
+"in insert mode: Ctrl-r <register>
+"in insert mode: Ctrl-a -> Last inserted Text
+"in insert mode: Ctrl-p -> word completion previous
+"in insert mode: Ctrl-n -> word completion next
+"in insert mode: Ctrl-x Ctrl-f  -> file names
+"in insert mode: Ctrl-x Ctrl-l  -> complete line
+"in insert mode: Ctrl-x Ctrl-l  -> complete line
 "
+"^r = insert text from a register
+"^a = insert text from register '.'
+"^p = completion menu
+"^x = special "completion mode" submode of insert
+"- - ^] = tag
+"- - ^p = pull from previous context
+"- - ^n = pull from next context
+"- - ^f = file completion
+"- - ^l = line
+"- - ^o = omnicompletion
+" g; to go to last edit
+" ctrl-w      - erases word (insert mode...
+" ctrl-u      - erases line  ...or on command line)
+" somehow there is not anotropia
+"
+" mand many more in link above.
+" Repeating commands use key-sequence @: Not clear how it works.
+"
+"
+" Cheat sheet: https://www.fprintf.net/vimCheatSheet.html
 " :registers to list all the registers and their contents.
 " Special registers: 
+" There are 4 read only registers: "., "%, ": and "#
+" https://www.brianstorti.com/vim-registers/
 " :version to display all kinds of interesting info
+"
+"
+" video list to watch as tutorial
+" https://www.youtube.com/watch?v=ZTCzWRqR_us&list=PL46-cKSxMYYCMpzXo6p0Cof8hJInYgohU&index=2
+"
 "
 " help map-modes to learn about mapping and remaping keys.
 " Check: https://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping
@@ -616,3 +699,16 @@ endif
 " Solarized options
 " silent! colorscheme solarized
 " colorscheme solarized8_light
+"
+let g:ycm_keep_logfiles = 1
+let g:ycm_log_level = 'debug'
+
+" If the base settings don't repro, paste your existing config for YCM only,
+" here:
+" let g:ycm_....
+
+" Load YCM (only)
+let &rtp .= ',' . expand( '<sfile>:p:h' )
+filetype plugin indent on
+
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
