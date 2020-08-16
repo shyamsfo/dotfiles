@@ -223,6 +223,8 @@ export PATH=$(npm bin):${PATH}
 
 set_java_version() {
     export JAVA_HOME=$(/usr/libexec/java_home -v $1)
+    export PROMPT_DATA="JAVA $1"
+    apply_prompt ${PROMPT_DATA}
 }
 
 env_nvm() {
@@ -391,6 +393,10 @@ random_emoji() {
 
 pidportfunction() {
     lsof -n -i4TCP:$1 | grep LISTEN
+}
+
+env_groovy() {
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
 }
 
 alias pidport=pidportfunction

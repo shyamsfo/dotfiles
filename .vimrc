@@ -1,5 +1,6 @@
 scriptencoding utf-8
 
+
 " How to start:
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
 " Now open vim and run :PluginInstall
@@ -20,9 +21,12 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'mileszs/ack.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'JamshedVesuna/vim-markdown-preview'
-" Plugin 'Valloric/YouCompleteMe'
+Plugin 'hashivim/vim-terraform', {'for': 'terraform'}
+
+"Plugin 'neoclide/coc.nvim'
+"Plugin 'Valloric/YouCompleteMe'
 "Plugin 'junegunn/fzf.vim'
-Plugin 'ycm-core/YouCompleteMe'
+"Plugin 'ycm-core/YouCompleteMe'
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'junegunn/fzf.vim'
 "Plugin 'bling/vim-airline'
@@ -493,7 +497,6 @@ au BufNewFile,BufRead Jenkinsfile setf groovy
 " registers - cap letters are across files. 
 " So you can go back from another file also
 " :wa writes all modified files
-" So you can go back from another file also
 " https://github.com/ciaranm/dotfiles has a great vimrc
 " v gets you into visual block mode, move the up/down arrow to select a block
 " of code. then use = to indent it. very usefulv gets you into visual block
@@ -526,7 +529,6 @@ au BufNewFile,BufRead Jenkinsfile setf groovy
 ":switchbuf usetab seemed useful, but works only for quickfix. sad.tab
 ":tabc closes the current tab.
 "
-"Leader key seems interesting:
 "http://stackoverflow.com/questions/1764263/what-is-the-leader-in-a-vimrc-file
 "
 ":so % to reload the vimrc file while editing it. :so ~/.vimrc or :so $MYVIMRC
@@ -542,6 +544,12 @@ au BufNewFile,BufRead Jenkinsfile setf groovy
 "
 " Some interesting options here:
 " https://github.com/skwp/dotfiles/blob/master/vimrc
+" https://stackoverflow.com/questions/11723169/selecting-entire-function-definition-in-vim/11723259  
+"
+" https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118
+"
+" Moving to an outer block: https://vi.stackexchange.com/questions/16829/moving-to-an-outer-block
+" 
 
 "echo g:colors_name to get color scheme in gui
 "
@@ -566,15 +574,47 @@ au BufNewFile,BufRead Jenkinsfile setf groovy
 "- - ^f = file completion
 "- - ^l = line
 "- - ^o = omnicompletion
+"- - ^k = dictionary
+"  Sup
 " g; to go to last edit
 " ctrl-w      - erases word (insert mode...
 " ctrl-u      - erases line  ...or on command line)
-" somehow there is not anotropia
-"
 " mand many more in link above.
 " Repeating commands use key-sequence @: Not clear how it works.
 "
+" Navigation across functions , paragraphs etc.
+" try (( [[ {{ and )) ]] }}
+" This can be used to even go to outer and outer code blocks within functions
 "
+" Selecting, copying deleting regions of code (functions, paragraphs etc.
+" https://stackoverflow.com/questions/11840126/how-to-delete-a-paragraph-as-quickly-as-possible?noredirect=1&lq=1
+"
+" dap yap d} y} etc. 
+"
+" :marks and :ju to see all marks and the jump list
+" Ctrl O and Ctrl I to move through the jump list (I think within a file). Needs more learning.
+"
+" Registers: https://www.brianstorti.com/vim-registers/
+" To append to a register instead of replacing contents use upper-case " register
+" " register. e.g. "ayy will set contents of register a while 
+"list
+"
+" "Ayy will append line to register A
+" if I use "by/foo then I'm yanking a copy of the text from here to the next line containing "foo" into the 'b' register. 
+" https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118
+"
+"
+"There are 4 read only registers: "., "%, ": and "#
+" % - file path, # - other file path, : - last command . - last inserted text
+"
+" We need to learn a lot more about visual mode.
+" eg: instructions to delete a para:
+" v   enter visual mode
+" {   move to first brace in function (may have to press more than once)
+" o   exchange cursor from top to bottom of selection
+" }   extend selection to bottom of function
+" d   delete selected text
+" abc ghi
 " Cheat sheet: https://www.fprintf.net/vimCheatSheet.html
 " :registers to list all the registers and their contents.
 " Special registers: 
@@ -646,7 +686,7 @@ se guifont=LiterationMonoPowerline:h14
 " use :color <scheme> to change color from within vim
 " Color scheme screen shots: https://vimcolors.com
 if has("gui_macvim")
-    se guifont=LiterationMonoPowerline:h12
+    se guifont=LiterationMonoPowerline:h14
     colorscheme PaperColor
     colorscheme gruvbox
     colorscheme flattened_light
@@ -712,3 +752,41 @@ let &rtp .= ',' . expand( '<sfile>:p:h' )
 filetype plugin indent on
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+
+let g:coc_global_extensions = [ 'coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml' , 'coc-java']
+
+" Better display for messages
+"set cmdheight=2
+" Smaller updatetime for CursorHold & CursorHoldI
+"set updatetime=300
+" don't give |ins-completion-menu| messages.
+"set shortmess+=c
+" always show signcolumns
+"set signcolumn=yes
+
+" Use `lp` and `ln` for navigate diagnostics
+"nmap <silent> <leader>lp <Plug>(coc-diagnostic-prev)
+"nmap <silent> <leader>ln <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+"nmap <silent> <leader>ld <Plug>(coc-definition)
+"nmap <silent> <leader>lt <Plug>(coc-type-definition)
+"nmap <silent> <leader>li <Plug>(coc-implementation)
+"nmap <silent> <leader>lf <Plug>(coc-references)
+
+" Remap for rename current word
+"nmap <leader>lr <Plug>(coc-rename)
+
+" Use K for show documentation in preview window
+"nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+"function! s:show_documentation()
+"  if &filetype == 'vim'
+"    execute 'h '.expand('<cword>')
+"  else
+""    call CocAction('doHover')
+"  endif
+"endfunction
+
+" Highlight symbol under cursor on CursorHold
+"autocmd CursorHold * silent call CocActionAsync('highlight')
