@@ -440,6 +440,9 @@ set t_vb=
 
 au BufNewFile,BufRead Jenkinsfile setf groovy
 
+" Use Ctrl-P to show the markdown preview when in a *.md file
+let vim_markdown_preview_github=1
+
 " Visual blocks
 " press v and enter visual block mode, now keep pressing j,k, G to keep selecting
 " lines as much as you want and once selected you can 
@@ -697,7 +700,7 @@ if has("gui_macvim")
     "colorscheme bw
     colorscheme solarized8_light
 elseif has("gui_running")
-    se guifont=Ubuntu\ Mono\ 11
+    se guifont=Ubuntu\ Mono\ 12
    colorscheme torte
 
 " colorscheme solarized8_light
@@ -713,7 +716,7 @@ elseif has("gui_running")
 "    colorscheme badwolf
 "    colorscheme cake16
 "    colorscheme peaksea
-""    colorscheme 0x7A69_dark
+"    colorscheme 0x7A69_dark
 "    colorscheme solarized8_light
 "    colorscheme torte
     colorscheme PaperColor
@@ -734,6 +737,7 @@ else
     colorscheme badwolf
     colorscheme torte
     colorscheme solarized8_light
+    colorscheme molokai
 endif
 
 " Solarized options

@@ -131,17 +131,6 @@ apply_prompt ${PROMPT_DATA}
 cd $app
 }
 
-
-env_grails() {
-    env_java
-    GRAILS_HOME=${HOME}/devel/java/grails-2.2.4
-    pathmunge ${GRAILS_HOME}/bin
-    app=${HOME}/devel/groovy/grails/sfdc
-    sfdc=${HOME}/devel/groovy/grails/sfdc
-    export PROMPT_DATA='GRAILS'
-    apply_prompt ${PROMPT_DATA}
-}
-
 env_r_lang() {
 export PROMPT_DATA='R-LANG'
 apply_prompt ${PROMPT_DATA}
@@ -152,39 +141,6 @@ apply_prompt ${PROMPT_DATA}
 cd $app
 }
 
-env_sunlight_rails() {
-env_ruby
-export PROMPT_DATA='RAILS-SUNLIGHT'
-apply_prompt ${PROMPT_DATA}
-app=${HOME}/devel/ruby/rails-projects/sunlight
-cd $app
-}
-
-env_rails() {
-    env_ruby
-    export PROMPT_DATA='RAILS-SFDC'
-    apply_prompt ${PROMPT_DATA}
-    app=${HOME}/devel/ruby/rails-projects/sfdc
-    sfdc=${HOME}/devel/ruby/rails-projects/sfdc
-    cd $app
-}
-
-    env_sfdc_rails
-}
-
-export RUBYOPT=rubygems 
-RUBYLIB=
-export ruby=${HOME}/devel/ruby
-app=${HOME}/devel/ruby/ruby-learner-scripts
-#RUBYLIB can be used to specify a list of directories.
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-export PROMPT_DATA='RUBY'
-apply_prompt ${PROMPT_DATA}
-cd $app
-
-}
-
 env_spark() {
 env_java
 SPARK_HOME=${HOME}/devel/bigdata/spark
@@ -192,14 +148,6 @@ export SPARK_HOME
 pathmunge ${SPARK_HOME}/sbin after
 pathmunge ${SPARK_HOME}/bin after
 
-}
-
-env_groovy() {
-env_java8
-export GROOVY_HOME=${devel}/java/groovy-2.1.6
-pathmunge ${GROOVY_HOME}/bin after
-export PROMPT_DATA='GROOVY'
-apply_prompt ${PROMPT_DATA}
 }
 
 env_scala() {
@@ -255,7 +203,7 @@ function env_java() {
 env_java8
 }
 
-export -f env_java env_app env_hadoop env_heroku env_android env_play env_r env_apache env_spring_boot env_guile env_grails env_r_lang env_ruby env_rails env_spark env_groovy env_scala
+export -f env_java env_app env_hadoop env_heroku env_android env_apache env_spring_boot env_guile env_r_lang env_spark env_scala
 
 export BOX_NAME='HOME-LINUX'
 apply_prompt ''
