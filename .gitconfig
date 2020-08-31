@@ -24,6 +24,7 @@
     sync = !git checkout master && git pull --rebase
     gdf  = "!~/bin/gdf \"$1\" \"$2\" "
     ll   = log --oneline --decorate
+    lll  = log --graph --decorate --pretty=oneline --abbrev-commit
     f    = fetch
 
     mm = checkout master 
@@ -44,6 +45,7 @@
 	tags = tag -l
 	branches = branch -a
 	remotes = remote -v
+	cleanup = !"echo 'Running clean up command: clean -ndf. Use -df to remove files'; git clean -ndf"
 
 	# List aliases
 	aliases = config --get-regexp alias
