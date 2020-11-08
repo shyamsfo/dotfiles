@@ -21,8 +21,10 @@ done
 
 IPY_INIT_DIR=${HOME}/.ipython/profile_default
 mkdir -p ${IPY_INIT_DIR}
-    if [ -f ${IPY_INIT_DIR}/ipython_config.py ]; then
-        cp  ${IPY_INIT_DIR}/ipython_config.py ${HOME}/old_dotfiles
-        \rm  ${IPY_INIT_DIR}/ipython_config.py
-        ln -s ${base_dir}/ipython_config.py ${IPY_INIT_DIR}/ipython_config.py
-    fi
+if [ -f ${IPY_INIT_DIR}/ipython_config.py ];
+then
+    cp  ${IPY_INIT_DIR}/ipython_config.py ${HOME}/old_dotfiles
+    \rm  ${IPY_INIT_DIR}/ipython_config.py
+fi
+echo "Linking ipython_config.py"
+ln -s ${base_dir}/ipython_config.py ${IPY_INIT_DIR}/ipython_config.py

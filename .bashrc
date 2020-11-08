@@ -111,7 +111,7 @@ case "$-" in
 esac
 # Used in prompt
 export BOX_NAME='NONE'
-export PROMPT_DATA=''
+export PROMPT_DATA=' '
 
 function apply_prompt() {
     #PS1=''
@@ -119,6 +119,7 @@ function apply_prompt() {
     #PS1="${CYAN}[${MAGENTA}${BOX_NAME} ${RED}shyam ${BLUE}\w${GREEN} ${PROMPT_DATA:- }${MAGENTA}(\$(get_git_branch))${MAGENTA} \#${MAGENTA}${CYAN}]${RESET}\[\e[0m\]${RESET}"
     #PS1="${CYAN}[${MAGENTA}${BOX_NAME} ${RED}shyam ${BLUE}\$(short_pwd) ${GREEN} ${PROMPT_DATA:- }${MAGENTA}(\$(get_git_branch))${MAGENTA} \#${MAGENTA}${CYAN}]${RESET}\[\e[0m\]${RESET}"
     PS1="${CYAN}[${MAGENTA}${BOX_NAME} ${RED}\u ${BLUE}\$(get_perl_pwd)${GREEN} ${PROMPT_DATA:- } ${MAGENTA}(\$(get_git_branch))${MAGENTA} \#${MAGENTA}${CYAN}]${RESET}\[\e[0m\]${RESET}"
+    PS1="${CYAN}[${MAGENTA}${RED}\u ${BLUE}\$(pwd)${GREEN} ${PROMPT_DATA:-}${MAGENTA} (\$(get_git_branch))${MAGENTA} \#${MAGENTA}${CYAN}]${RESET}\[\e[0m\]${RESET}"
     export PS1
 }
 

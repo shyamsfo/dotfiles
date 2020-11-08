@@ -736,8 +736,8 @@ else
     colorscheme oceanlight
     colorscheme badwolf
     colorscheme torte
-    colorscheme solarized8_light
     colorscheme molokai
+    colorscheme solarized8_light
 endif
 
 " Solarized options
