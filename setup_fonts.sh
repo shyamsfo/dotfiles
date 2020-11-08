@@ -1,4 +1,3 @@
-mkdir -p ~/powerline-fonts
-cd ~/powerline-fonts
-git clone https://github.com/powerline/fonts.git .
+#git submodule add  https://github.com/powerline/fonts.git .
+cd ${HOME}/init/dotfiles/fonts
 ./install.sh
