@@ -17,7 +17,7 @@ $ git clone git@github.com:shyamsfo/dotfiles.git
 Next, create links to these dotfiles in the home directory
 ``` bash
 cd ${HOME}/init/dotfiles
-./create_links.sh
+./install.sh
 ```
 (Any existing files are saved into `${HOME}/old_dotfiles`)
 
@@ -50,6 +50,11 @@ Start a new shell to enjoy the new dotfiles
 ### Bashrc
 
 TBD. Add more details...
+
+### MAC
+run `mac_brew_setup.sh` to install usual set of mac brew packages
+run `setup_fonts` to install extra (powerline) fonts for mac
+
 ### Vimrc
 
 Setup for vim:
@@ -59,6 +64,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
 ```
 
 TBD. Add more details...
+
 ### aliases
 
 TBD. Add more details...
@@ -68,6 +74,10 @@ TBD. Add more details...
 ### Git
 
 `$HOME/.gitconfig` has the git settings. Change as needed
+
+### IPython
+
+ipython configs are installed to this directory: `IPY_INIT_DIR=${HOME}/.ipython/profile_default`
 
 ## Notes
 
