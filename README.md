@@ -62,10 +62,12 @@ TBD. Add more details...
 ### aliases
 
 TBD. Add more details...
+* aliases are setup in `$HOME/.aliases` and automatically sourced from bashrc
+* Make adjustments as needed.
 
 ### Git
 
-TBD. Add more details...
+`$HOME/.gitconfig` has the git settings. Change as needed
 
 ## Notes
 
