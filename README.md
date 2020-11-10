@@ -8,19 +8,26 @@ My `.bashrc`, `.vimrc` and other init files.
 
 First, clone the repository.
 
-```
-sh
-$ git clone git@bitbucket.org:shyamsfo/init
+``` bash
+mkdir -p ${HOME}/init
+cd ${HOME}/init
+$ git clone git@github.com:shyamsfo/dotfiles.git
 ```
 
 Next, create links to these dotfiles in the home directory
-```
-cd ${HOME}/init
-./dotfiles/create_links.sh
+``` bash
+cd ${HOME}/init/dotfiles
+./create_links.sh
 ```
 (Any existing files are saved into `${HOME}/old_dotfiles`)
 
+Create `.bashrc_custom` in the home directory for further customizations.
+
 Finally, start a new shell for these to take effect
+
+``` bash
+exec bash --login
+```
 
 ## Installation on remote hosts
 
@@ -44,6 +51,12 @@ Start a new shell to enjoy the new dotfiles
 
 TBD. Add more details...
 ### Vimrc
+
+Setup for vim:
+``` bash
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
+#Now open vim and run :PluginInstall
+```
 
 TBD. Add more details...
 ### aliases
